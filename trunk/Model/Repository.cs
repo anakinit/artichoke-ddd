@@ -13,6 +13,10 @@ namespace Artichoke.Model
     {
         private ITransaction _transaction;
 
+        public Repository()
+            : this(CONSTANTS.DEFAULT_DB_KEY)
+        { /* Do Nothing */ }
+
         public Repository(string dbKey)
             : this(SessionHelper.GetSession(dbKey)) { /* Do Nothing */ }
 

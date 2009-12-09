@@ -9,9 +9,7 @@ namespace Artichoke
     {
         public const string SESSIONS_KEY = "ArtichokeSessionsKey";
         public const string SESSION_FACTORIES_KEY = "ArtichokeSessionFactoriesKey";
-
-        public const string TEST_CONST = "TestConst";
-
+        public const string DEFAULT_DB_KEY = "Default";
     }
 
 }

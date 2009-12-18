@@ -7,6 +7,7 @@ using Artichoke.Services.Exceptions;
 
 namespace Artichoke.Services
 {
+
     public abstract class Service
     {
         private readonly IValidationDictionary validation;

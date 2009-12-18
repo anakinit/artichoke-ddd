@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{417ADE62-9E28-497E-B1E0-999C9592F306}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -110,6 +110,7 @@
     <Compile Include="Model\ReadOnlyDictionary.cs" />
     <Compile Include="Persistance\ContextStore.cs" />
     <Compile Include="Persistance\ISessionManager.cs" />
+    <Compile Include="Services\IServiceState.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\Validation\IValidationDictionary.cs" />
     <Compile Include="Services\RepositoryService.cs" />

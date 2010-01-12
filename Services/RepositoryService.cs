@@ -21,7 +21,8 @@ namespace Artichoke.Services
 
         ~RepositoryService()
         {
-            repository.Dispose();
+            if (repository != null)
+                repository.Dispose();
         }
 
         public TRepository Repository

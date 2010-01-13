@@ -5,30 +5,40 @@ using System.Text;
 using Castle.Windsor;
 using Castle.Windsor.Configuration.Interpreters;
 using NHibernate;
+using System.Reflection;
 
 namespace Artichoke.Persistance
 {
     internal static class SessionHelper
     {
-        private static readonly ISessionManager sessionManager;
+        private static readonly IWindsorContainer container;
+        //private static readonly ISessionManager sessionManager;
         private static object locker = new Object();
         
         static SessionHelper()
         {
-            var windsorContainer = new WindsorContainer(new XmlInterpreter());
-            sessionManager = windsorContainer.Resolve<ISessionManager>();
-
-            if (sessionManager == null)
-                throw new ApplicationException("Session Manager not initialized.");
+            container = new WindsorContainer(new XmlInterpreter());
         }
 
-        public static ISession GetSession(string dbKey)
+        private static string GetAssemblyName(Type type)
         {
-            if (!CurrentSessions.ContainsKey(dbKey) || CurrentSessions[dbKey] == null || !CurrentSessions[dbKey].IsOpen)
+            return type.Assembly.GetName().Name;
+        }
+
+        private static string GetKey(Type type, string dbKey)
+        {
+            return string.Concat(GetAssemblyName(type) + "#" + dbKey);
+        }
+
+
+        public static ISession GetSession(Type type, string dbKey)
+        {
+            var key = GetKey(type, dbKey);
+            if (!CurrentSessions.ContainsKey(key) || CurrentSessions[key] == null || !CurrentSessions[key].IsOpen)
             {
-                CurrentSessions.Add(dbKey, GetSessionFactory(dbKey).OpenSession());
+                CurrentSessions.Add(key, GetSessionFactory(type, dbKey).OpenSession());
             }
-            return CurrentSessions[dbKey];
+            return CurrentSessions[key];
         }
 
         public static void CloseSession(string dbKey)
@@ -65,16 +75,24 @@ namespace Artichoke.Persistance
             }
         }
 
-        private static ISessionFactory GetSessionFactory(string dbKey)
+        private static ISessionFactory GetSessionFactory(Type type, string dbKey)
         {
+            var key = GetKey(type, dbKey);
             lock (locker)
             {
-                if (!SessionFactories.ContainsKey(dbKey))
+                if (!SessionFactories.ContainsKey(key))
                 {
+                    ISessionManager sessionManager = null;
+                    sessionManager = (ISessionManager)container[GetAssemblyName(type)];
+                    if (sessionManager == null)
+                        sessionManager = (ISessionManager)container[typeof(ISessionManager)];
+                    if (sessionManager == null)
+                        throw new InvalidProgramException("Crap is going to crap!");
+
                     var sessionFactory = sessionManager.BuildSessionFactory(dbKey);
-                    SessionFactories.Add(dbKey, sessionFactory);
+                    SessionFactories.Add(key, sessionFactory);
                 }
-                return SessionFactories[dbKey];
+                return SessionFactories[key];
             }
         }
 

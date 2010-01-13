@@ -18,7 +18,7 @@ namespace Artichoke.Model
         { /* Do Nothing */ }
 
         public Repository(string dbKey)
-            : this(SessionHelper.GetSession(dbKey)) { /* Do Nothing */ }
+            : this(SessionHelper.GetSession(typeof(TModel), dbKey)) { /* Do Nothing */ }
 
         public Repository(ISession session)
             : base(session) { /* Do Nothing */}

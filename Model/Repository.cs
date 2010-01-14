@@ -43,14 +43,23 @@ namespace Artichoke.Model
             return base.ProvideSession();
         }
 
+        public virtual void SaveItem(object item)
+        {
+            SaveItem(item as TModel);
+        }
 
-        protected void SaveItem(TModel item)
+        public virtual void SaveItem(TModel item)
         {
             base.Session.SaveOrUpdate(item);
             Session.Flush();
         }
 
-        protected void DeleteItem(TModel item)
+        public virtual void DeleteItem(object item)
+        {
+            DeleteItem(item as TModel);
+        }
+
+        public virtual void DeleteItem(TModel item)
         {
             base.Session.Delete(item);
             Session.Flush();
@@ -81,6 +90,8 @@ namespace Artichoke.Model
 
     public interface IRepository : IDisposable
     {
+        void SaveItem(object item);
+        void DeleteItem(object item);
         void BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();

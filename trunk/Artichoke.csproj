@@ -107,7 +107,6 @@
     <Compile Include="Domain\ModelMap.cs" />
     <Compile Include="Domain\ModelWithAudit.cs" />
     <Compile Include="Domain\ModelWithVersioning.cs" />
-    <Compile Include="Model\Interface1.cs" />
     <Compile Include="Utilities\ReadOnlyDictionary.cs" />
     <Compile Include="Persistance\ContextStore.cs" />
     <Compile Include="Persistance\CurrentApplication.cs" />

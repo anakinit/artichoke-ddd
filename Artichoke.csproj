@@ -99,15 +99,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CONSTANTS.cs" />
-    <Compile Include="Model\Common.cs" />
-    <Compile Include="Model\IModelBase.cs" />
-    <Compile Include="Model\IWithAudit.cs" />
-    <Compile Include="Model\IWithVersioning.cs" />
-    <Compile Include="Model\ModelBase.cs" />
-    <Compile Include="Model\ModelMap.cs" />
-    <Compile Include="Model\ModelWithAudit.cs" />
-    <Compile Include="Model\ModelWithVersioning.cs" />
-    <Compile Include="Model\ReadOnlyDictionary.cs" />
+    <Compile Include="Domain\Common.cs" />
+    <Compile Include="Domain\IModelBase.cs" />
+    <Compile Include="Domain\IWithAudit.cs" />
+    <Compile Include="Domain\IWithVersioning.cs" />
+    <Compile Include="Domain\ModelBase.cs" />
+    <Compile Include="Domain\ModelMap.cs" />
+    <Compile Include="Domain\ModelWithAudit.cs" />
+    <Compile Include="Domain\ModelWithVersioning.cs" />
+    <Compile Include="Domain\ReadOnlyDictionary.cs" />
     <Compile Include="Persistance\ContextStore.cs" />
     <Compile Include="Persistance\CurrentApplication.cs" />
     <Compile Include="Persistance\CurrentSessionModule.cs" />
@@ -116,10 +116,10 @@
     <Compile Include="Services\IServiceState.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\Validation\IValidationDictionary.cs" />
-    <Compile Include="Services\RepositoryService.cs" />
+    <Compile Include="Services\DaoService.cs" />
     <Compile Include="Services\Validation\ModelStateWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Persistance\Dao2Base.cs" />
+    <Compile Include="Persistance\DaoBase.cs" />
     <Compile Include="Persistance\SessionHelper.cs" />
     <Compile Include="Services\Exceptions\ValidationException.cs" />
     <Compile Include="Utilities\Formatters.cs" />

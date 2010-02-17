@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Artichoke.Model
+namespace Artichoke.Domain
 {
     public abstract class ModelBase : IModelBase
     {

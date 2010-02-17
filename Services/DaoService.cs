@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Artichoke.Model;
+using Artichoke.Persistance;
 using Artichoke.Services.Validation;
 using Artichoke.Services.Exceptions;
 
 namespace Artichoke.Services
 {
-    public abstract class RepositoryService<TRepository> : Service where TRepository : IRepository
+    public abstract class RepositoryService<TRepository> : Service where TRepository : IDaoBase
     {
         private readonly TRepository repository;
        

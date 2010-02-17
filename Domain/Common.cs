@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Reflection;
 
-namespace Artichoke.Model
+namespace Artichoke.Domain
 {
     public static class Common
     {

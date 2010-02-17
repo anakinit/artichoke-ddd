@@ -8,7 +8,7 @@ using NHibernate;
 
 namespace Artichoke.Persistance
 {
-    public class CurrentSessionModule : IHttpModule
+    public class WebSessionModule : IHttpModule
     {
         public void Init(HttpApplication context)
         {
@@ -27,7 +27,7 @@ namespace Artichoke.Persistance
 
         private void Application_EndRequest(object sender, EventArgs e)
         {
-            CurrentApplication.UnbindSessions();
+            WebApplication.UnbindSessions();
         }
 
     }

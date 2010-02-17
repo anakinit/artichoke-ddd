@@ -26,7 +26,7 @@ namespace Artichoke.Persistance
 
         public ISession GetCurrentSession()
         {
-            return CurrentApplication.GetCurrentSession(modelType, dbKey);
+            return WebApplication.GetCurrentSession(modelType, dbKey);
         }
 
         protected IOrderedQueryable<TModel> Query

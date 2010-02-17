@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Artichoke.Domain
+namespace Artichoke.Utilities
 {
     public class ReadOnlyDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {

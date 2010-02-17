@@ -107,7 +107,7 @@
     <Compile Include="Domain\ModelMap.cs" />
     <Compile Include="Domain\ModelWithAudit.cs" />
     <Compile Include="Domain\ModelWithVersioning.cs" />
-    <Compile Include="Domain\ReadOnlyDictionary.cs" />
+    <Compile Include="Utilities\ReadOnlyDictionary.cs" />
     <Compile Include="Persistance\ContextStore.cs" />
     <Compile Include="Persistance\CurrentApplication.cs" />
     <Compile Include="Persistance\CurrentSessionModule.cs" />
@@ -124,6 +124,9 @@
     <Compile Include="Services\Exceptions\ValidationException.cs" />
     <Compile Include="Utilities\Formatters.cs" />
     <Compile Include="Utilities\Validators.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

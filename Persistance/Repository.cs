@@ -25,7 +25,12 @@ namespace Artichoke.Model
 
         //~Repository()
         //{
-        //    base.Session.Flush();
+        //    var session = base.Session;
+        //    if (session != null && session.IsOpen)
+        //    {
+        //        session.Flush();
+        //        session.Close();
+        //    }
         //}
 
         protected IOrderedQueryable<TModel> Query
@@ -45,13 +50,17 @@ namespace Artichoke.Model
 
         public virtual void SaveItem(object item)
         {
+
             SaveItem(item as TModel);
         }
 
         public virtual void SaveItem(TModel item)
         {
-            base.Session.SaveOrUpdate(item);
-            Session.Flush();
+            using (var tx = Session.BeginTransaction())
+            {
+                Session.SaveOrUpdate(item);
+                tx.Commit();
+            }
         }
 
         public virtual void DeleteItem(object item)
@@ -61,8 +70,11 @@ namespace Artichoke.Model
 
         public virtual void DeleteItem(TModel item)
         {
-            base.Session.Delete(item);
-            Session.Flush();
+            using (var tx = Session.BeginTransaction())
+            {
+                Session.Delete(item);
+                tx.Commit();
+            }
         }
 
         public void BeginTransaction()

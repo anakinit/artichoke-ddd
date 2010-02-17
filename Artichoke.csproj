@@ -100,13 +100,13 @@
   <ItemGroup>
     <Compile Include="CONSTANTS.cs" />
     <Compile Include="Domain\Common.cs" />
-    <Compile Include="Domain\IModelBase.cs" />
+    <Compile Include="Domain\IEntityBase.cs" />
     <Compile Include="Domain\IWithAudit.cs" />
     <Compile Include="Domain\IWithVersioning.cs" />
-    <Compile Include="Domain\ModelBase.cs" />
-    <Compile Include="Domain\ModelMap.cs" />
-    <Compile Include="Domain\ModelWithAudit.cs" />
-    <Compile Include="Domain\ModelWithVersioning.cs" />
+    <Compile Include="Domain\EntityBase.cs" />
+    <Compile Include="Domain\EntityMap.cs" />
+    <Compile Include="Domain\EntityWithAudit.cs" />
+    <Compile Include="Domain\EntityWithVersioning.cs" />
     <Compile Include="Utilities\ReadOnlyDictionary.cs" />
     <Compile Include="Persistance\ContextStore.cs" />
     <Compile Include="Persistance\CurrentApplication.cs" />

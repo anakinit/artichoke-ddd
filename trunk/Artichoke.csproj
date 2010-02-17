@@ -111,6 +111,7 @@
     <Compile Include="Persistance\ContextStore.cs" />
     <Compile Include="Persistance\CurrentApplication.cs" />
     <Compile Include="Persistance\CurrentSessionModule.cs" />
+    <Compile Include="Persistance\IDaoConfiguration.cs" />
     <Compile Include="Persistance\ISessionManager.cs" />
     <Compile Include="Services\IServiceState.cs" />
     <Compile Include="Services\Service.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Services\RepositoryService.cs" />
     <Compile Include="Services\Validation\ModelStateWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Persistance\Repository.cs" />
+    <Compile Include="Persistance\Dao2Base.cs" />
     <Compile Include="Persistance\SessionHelper.cs" />
     <Compile Include="Services\Exceptions\ValidationException.cs" />
     <Compile Include="Utilities\Formatters.cs" />

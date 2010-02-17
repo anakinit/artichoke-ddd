@@ -27,7 +27,7 @@ namespace Artichoke.Persistance
 
         private static string GetKey(Type type, string dbKey)
         {
-            return string.Concat(type.Assembly.FullName, "#", dbKey);
+            return string.Concat(type.Assembly.GetName().Name, "#", dbKey);
         }
 
 
@@ -39,13 +39,16 @@ namespace Artichoke.Persistance
             {
                 if (!sessionFactories.ContainsKey(key) || sessionFactories[key] == null)
                 {
-                    var assemblyName = type.Assembly.FullName;
-                    var configuration = container[assemblyName] as IDaoConfiguration;
+                    var assemblyName = type.Assembly.GetName().Name;
+                    var daoConfiguration = container[assemblyName] as IDaoConfiguration;
 
-                    if (configuration == null)
+                    if (daoConfiguration == null)
                         throw new InvalidProgramException(string.Format("Unable to load IDaoConfiguration for '{0}'", assemblyName));
 
-                    var sessionFactory = configuration.BuildConfiguration(dbKey).BuildSessionFactory();
+                    var configuration = daoConfiguration.BuildConfiguration(dbKey);
+                    configuration.Properties.Add("current_session_context_class", "managed_web");
+
+                    var sessionFactory = configuration.BuildSessionFactory();
 
                     sessionFactories.Add(key, sessionFactory);
                 }
@@ -76,9 +79,11 @@ namespace Artichoke.Persistance
 
         public static ISession GetCurrentSession(Type type, string dbKey)
         {
-            var session = GetSessionFactory(type, dbKey).GetCurrentSession();
-            ManagedWebSessionContext.Bind(HttpContext.Current, session);
-            return session;
+            var sessionfactory = GetSessionFactory(type, dbKey);
+            if (!ManagedWebSessionContext.HasBind(HttpContext.Current, sessionfactory)) {
+                ManagedWebSessionContext.Bind(HttpContext.Current, sessionfactory.OpenSession());
+            }
+            return sessionfactory.GetCurrentSession();
         }
     }
 }

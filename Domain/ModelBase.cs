@@ -5,9 +5,9 @@ using System.Text;
 
 namespace Artichoke.Domain
 {
-    public abstract class ModelBase : IModelBase
+    public abstract class EntityBase : IEntityBase
     {
-        public ModelBase()
+        public EntityBase()
         {
         }
 

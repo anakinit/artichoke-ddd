@@ -8,26 +8,20 @@ using Artichoke.Services.Exceptions;
 
 namespace Artichoke.Services
 {
-    public abstract class RepositoryService<TRepository> : Service where TRepository : IDaoBase
+    public abstract class DaoService<TDao> : Service where TDao : IDaoBase
     {
-        private readonly TRepository repository;
+        private readonly TDao dao;
        
-        public RepositoryService(TRepository repository, IValidationDictionary validation)
+        public DaoService(TDao dao, IValidationDictionary validation)
             : base(validation)
         {
-            if (repository == null) throw new ArgumentNullException("repository");
-            this.repository = repository;
+            if (dao == null) throw new ArgumentNullException("repository");
+            this.dao = dao;
         }
 
-        ~RepositoryService()
+        public TDao Dao
         {
-            if (repository != null)
-                repository.Dispose();
-        }
-
-        public TRepository Repository
-        {
-            get { return repository; }
+            get { return dao; }
         }
     }
 }

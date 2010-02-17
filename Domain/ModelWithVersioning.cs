@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Artichoke.Domain
 {
-    public abstract class ModelWithVersioning : ModelWithAudit, IWithVersioning
+    public abstract class EntityWithVersioning : EntityWithAudit, IWithVersioning
     {
 
         private int _version;

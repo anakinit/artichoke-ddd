@@ -12,7 +12,8 @@ namespace Artichoke.Persistance
     {
         public void Init(HttpApplication context)
         {
-            context.BeginRequest +=new EventHandler(Application_BeginRequest);
+            //context.BeginRequest += new EventHandler(Application_BeginRequest);
+            context.EndRequest += new EventHandler(Application_EndRequest);
         }
         
         public void Dispose()
@@ -21,20 +22,12 @@ namespace Artichoke.Persistance
 
         private void Application_BeginRequest(object sender, EventArgs e)
         {
-            ManagedWebSessionContext.Bind(HttpContext.Current, CurrentApplication.SessionFactory.OpenSession());
+
         }
 
         private void Application_EndRequest(object sender, EventArgs e)
         {
-            ISession session = ManagedWebSessionContext.Unbind(HttpContext.Current, CurrentApplication.SessionFactory);
-
-            if (session != null)
-            {
-                if (session.Transaction.IsActive)
-                    session.Transaction.Rollback();
-
-                session.Close();
-            }
+            CurrentApplication.UnbindSessions();
         }
 
     }

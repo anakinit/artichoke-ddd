@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using FluentNHibernate.Mapping;
 
-namespace Artichoke.Model
+namespace Artichoke.Domain
 {
     public abstract class ModelMap<TModel> : ClassMap<TModel> where TModel : IModelBase
     {

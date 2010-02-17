@@ -4,40 +4,39 @@ using System.Linq;
 using System.Text;
 using NHibernate;
 using NHibernate.Linq;
-using Artichoke.Persistance;
+using Artichoke.Domain;
 
-namespace Artichoke.Model
+namespace Artichoke.Persistance
 {
     public abstract class DaoBase<TModel>
-        : IRepository where TModel : class
+        : IDaoBase where TModel : class
     {
-        private ITransaction _transaction;
+        private string dbKey;
+        private Type modelType;
 
         public DaoBase()
             : this(CONSTANTS.DEFAULT_DB_KEY)
         { /* Do Nothing */ }
 
         public DaoBase(string dbKey)
-            : this(SessionHelper.GetSession(typeof(TModel), dbKey)) { /* Do Nothing */ }
+        {
+            this.dbKey = dbKey;
+            this.modelType = typeof(TModel);
+        }
 
-        //~Repository()
-        //{
-        //    var session = base.Session;
-        //    if (session != null && session.IsOpen)
-        //    {
-        //        session.Flush();
-        //        session.Close();
-        //    }
-        //}
+        public ISession GetCurrentSession()
+        {
+            return CurrentApplication.GetCurrentSession(modelType, dbKey);
+        }
 
         protected IOrderedQueryable<TModel> Query
         {
-            get { return CurrentApplication.GetCurrentSession().Linq<TModel>(); }
+            get { return GetCurrentSession().Linq<TModel>(); }
         }
 
         protected IOrderedQueryable<TQueryModel> GetQuery<TQueryModel>()
         {
-            return CurrentApplication.GetCurrentSession().Linq<TQueryModel>();
+            return GetCurrentSession().Linq<TQueryModel>();
         }
 
         public virtual void Save(object item)
@@ -47,7 +46,7 @@ namespace Artichoke.Model
 
         public virtual void Save(TModel item)
         {
-            var session = CurrentApplication.GetCurrentSession();
+            var session = GetCurrentSession();
             using (var transaction = session.BeginTransaction())
             {
                 session.SaveOrUpdate(item);
@@ -62,7 +61,7 @@ namespace Artichoke.Model
 
         public virtual void Delete(TModel item)
         {
-            var session = CurrentApplication.GetCurrentSession();
+            var session = GetCurrentSession();
             using (var transaction = session.BeginTransaction())
             {
                 session.SaveOrUpdate(item);
@@ -71,7 +70,7 @@ namespace Artichoke.Model
         }
     }
 
-    public interface IRepository : IDisposable
+    public interface IDaoBase
     {
         void Save(object item);
         void Delete(object item);

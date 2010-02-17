@@ -109,8 +109,8 @@
     <Compile Include="Domain\EntityWithVersioning.cs" />
     <Compile Include="Utilities\ReadOnlyDictionary.cs" />
     <Compile Include="Persistance\ContextStore.cs" />
-    <Compile Include="Persistance\CurrentApplication.cs" />
-    <Compile Include="Persistance\CurrentSessionModule.cs" />
+    <Compile Include="Persistance\WebApplication.cs" />
+    <Compile Include="Persistance\WebSessionModule.cs" />
     <Compile Include="Persistance\IDaoConfiguration.cs" />
     <Compile Include="Persistance\ISessionManager.cs" />
     <Compile Include="Services\IServiceState.cs" />

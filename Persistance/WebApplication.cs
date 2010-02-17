@@ -12,13 +12,13 @@ using NHibernate.Context;
 
 namespace Artichoke.Persistance
 {
-    public class CurrentApplication : HttpApplication
+    public class WebApplication : HttpApplication
     {
         private static readonly IDictionary<string, ISessionFactory> sessionFactories;
         private static readonly IWindsorContainer container;
         private static readonly object lockObject;
 
-        static CurrentApplication()
+        static WebApplication()
         {
             lockObject = new Object();
             container = new WindsorContainer(new XmlInterpreter());

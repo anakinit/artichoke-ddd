@@ -6,9 +6,9 @@ using FluentNHibernate.Mapping;
 
 namespace Artichoke.Domain
 {
-    public abstract class ModelMap<TModel> : ClassMap<TModel> where TModel : IModelBase
+    public abstract class EntityMap<TModel> : ClassMap<TModel> where TModel : IEntityBase
     {
-        public ModelMap()
+        public EntityMap()
         {
             var interfaces = typeof(TModel).GetInterfaces();
 

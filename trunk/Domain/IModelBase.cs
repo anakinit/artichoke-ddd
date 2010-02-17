@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Artichoke.Domain
 {
-    public interface IModelBase
+    public interface IEntityBase
     {
     }
 }

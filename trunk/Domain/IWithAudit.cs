@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Artichoke.Domain
 {
-    public interface IWithAudit : IModelBase
+    public interface IWithAudit : IEntityBase
     {
         DateTime Created
         {

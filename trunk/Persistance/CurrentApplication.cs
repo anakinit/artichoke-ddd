@@ -22,6 +22,7 @@ namespace Artichoke.Persistance
         {
             lockObject = new Object();
             container = new WindsorContainer(new XmlInterpreter());
+            sessionFactories = new Dictionary<string, ISessionFactory>();
         }
 
         private static string GetKey(Type type, string dbKey)

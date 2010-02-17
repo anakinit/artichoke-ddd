@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Artichoke.Domain
 {
-    public abstract class ModelWithAudit : ModelBase, IWithAudit
+    public abstract class EntityWithAudit : EntityBase, IWithAudit
     {
         private DateTime _created = DateTime.MinValue;
         private DateTime _modified = DateTime.MinValue;

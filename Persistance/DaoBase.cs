@@ -8,17 +8,17 @@ using Artichoke.Domain;
 
 namespace Artichoke.Persistance
 {
-    public abstract class DaoBase<TModel>
-        : IDaoBase where TModel : class
+    public abstract class Dao<TModel>
+        : IDao where TModel : class
     {
         private string dbKey;
         private Type modelType;
 
-        public DaoBase()
+        public Dao()
             : this(CONSTANTS.DEFAULT_DB_KEY)
         { /* Do Nothing */ }
 
-        public DaoBase(string dbKey)
+        public Dao(string dbKey)
         {
             this.dbKey = dbKey;
             this.modelType = typeof(TModel);
@@ -70,7 +70,7 @@ namespace Artichoke.Persistance
         }
     }
 
-    public interface IDaoBase
+    public interface IDao
     {
         void Save(object item);
         void Delete(object item);

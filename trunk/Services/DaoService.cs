@@ -8,14 +8,14 @@ using Artichoke.Services.Exceptions;
 
 namespace Artichoke.Services
 {
-    public abstract class DaoService<TDao> : Service where TDao : IDaoBase
+    public abstract class DaoService<TDao> : Service where TDao : IDao
     {
         private readonly TDao dao;
        
         public DaoService(TDao dao, IValidationDictionary validation)
             : base(validation)
         {
-            if (dao == null) throw new ArgumentNullException("repository");
+            if (dao == null) throw new ArgumentNullException("dao");
             this.dao = dao;
         }
 

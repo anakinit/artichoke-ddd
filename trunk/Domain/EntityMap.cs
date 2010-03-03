@@ -6,15 +6,15 @@ using FluentNHibernate.Mapping;
 
 namespace Artichoke.Domain
 {
-    public abstract class EntityMap<TModel> : ClassMap<TModel> where TModel : IEntityBase
+    public abstract class EntityMap<TEntity> : ClassMap<TEntity> where TEntity : IEntityBase
     {
         public EntityMap()
         {
-            var interfaces = typeof(TModel).GetInterfaces();
+            var interfaces = typeof(TEntity).GetInterfaces();
 
             if (interfaces.Contains(typeof(IWithVersioning)))
             {
-                var property = typeof(TModel).GetProperty("Version");
+                var property = typeof(TEntity).GetProperty("Version");
                 if (property == null)
                     throw new MissingFieldException("Version");
                 else
@@ -23,13 +23,13 @@ namespace Artichoke.Domain
 
             if (interfaces.Contains(typeof(IWithAudit)))
             {
-                var created = typeof(TModel).GetProperty("Created");
+                var created = typeof(TEntity).GetProperty("Created");
                 if (created == null)
                     throw new MissingFieldException("Created");
                 else
                     Map(created, "Created").Insert().Not.Update();
 
-                var modified = typeof(TModel).GetProperty("Modified");
+                var modified = typeof(TEntity).GetProperty("Modified");
                 if (modified == null)
                     throw new MissingFieldException("Modified");
                 else

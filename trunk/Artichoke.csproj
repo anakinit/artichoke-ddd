@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="CONSTANTS.cs" />
     <Compile Include="Domain\Common.cs" />
+    <Compile Include="Domain\EntitySubMap.cs" />
     <Compile Include="Domain\IEntityBase.cs" />
     <Compile Include="Domain\IWithAudit.cs" />
     <Compile Include="Domain\IWithVersioning.cs" />

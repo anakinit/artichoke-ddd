@@ -80,10 +80,24 @@ namespace Artichoke.Persistance
         public static ISession GetCurrentSession(Type type, string dbKey)
         {
             var sessionfactory = GetSessionFactory(type, dbKey);
-            if (!ManagedWebSessionContext.HasBind(HttpContext.Current, sessionfactory)) {
-                ManagedWebSessionContext.Bind(HttpContext.Current, sessionfactory.OpenSession());
+
+            if (HttpContext.Current != null)
+            {
+                if (!ManagedWebSessionContext.HasBind(HttpContext.Current, sessionfactory))
+                {
+                    ManagedWebSessionContext.Bind(HttpContext.Current, sessionfactory.OpenSession());
+                }
+
+                return sessionfactory.GetCurrentSession();
             }
-            return sessionfactory.GetCurrentSession();
+            else
+            {
+                var session = sessionfactory.OpenSession();
+                session.FlushMode = FlushMode.Commit;
+                return session;
+            }
+
+            
         }
     }
 }

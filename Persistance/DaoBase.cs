@@ -64,7 +64,7 @@ namespace Artichoke.Persistance
             var session = GetCurrentSession();
             using (var transaction = session.BeginTransaction())
             {
-                session.SaveOrUpdate(item);
+                session.Delete(item);
                 transaction.Commit();
             }
         }

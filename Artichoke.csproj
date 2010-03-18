@@ -113,6 +113,12 @@
     <Compile Include="Domain\EntityMap.cs" />
     <Compile Include="Domain\EntityWithAudit.cs" />
     <Compile Include="Domain\EntityWithVersioning.cs" />
+    <Compile Include="Security\Domain\ProxyRole.cs" />
+    <Compile Include="Security\Domain\ProxyRoleDao.cs" />
+    <Compile Include="Security\Domain\ProxyUser.cs" />
+    <Compile Include="Security\Domain\ProxyUserDao.cs" />
+    <Compile Include="Security\TransaktionMembershipProvider.cs" />
+    <Compile Include="Security\TransaktionRoleProvider.cs" />
     <Compile Include="Utilities\ReadOnlyDictionary.cs" />
     <Compile Include="Persistance\ContextStore.cs" />
     <Compile Include="Persistance\WebApplication.cs" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using NHibernate;
 
-namespace Artichoke.Persistance
+namespace Artichoke.Persistence
 {
     public interface ISessionManager
     {

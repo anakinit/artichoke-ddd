@@ -10,7 +10,7 @@ using Castle.Windsor.Configuration.Interpreters;
 using NHibernate.Context;
 
 
-namespace Artichoke.Persistance
+namespace Artichoke.Persistence
 {
     public class WebApplication : HttpApplication
     {
@@ -93,7 +93,7 @@ namespace Artichoke.Persistance
             else
             {
                 var session = sessionfactory.OpenSession();
-                session.FlushMode = FlushMode.Commit;
+                session.FlushMode = FlushMode.Always;
                 return session;
             }
 

@@ -6,7 +6,7 @@ using System.Web;
 using NHibernate.Context;
 using NHibernate;
 
-namespace Artichoke.Persistance
+namespace Artichoke.Persistence
 {
     public class WebSessionModule : IHttpModule
     {

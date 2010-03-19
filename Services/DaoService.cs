@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Artichoke.Persistance;
+using Artichoke.Persistence;
 using Artichoke.Services.Validation;
 using Artichoke.Services.Exceptions;
 
@@ -12,7 +12,7 @@ namespace Artichoke.Services
     {
         private readonly TDao dao;
        
-        public DaoService(TDao dao, IValidationDictionary validation)
+        protected DaoService(TDao dao, IValidation validation)
             : base(validation)
         {
             if (dao == null) throw new ArgumentNullException("dao");

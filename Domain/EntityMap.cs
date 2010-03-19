@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FluentNHibernate.Mapping;
+using FluentNHibernate;
 
 namespace Artichoke.Domain
 {
     public abstract class EntityMap<TEntity> : ClassMap<TEntity> where TEntity : IEntityBase
     {
-        public EntityMap()
-        {
+        private void Initialize() {
             var interfaces = typeof(TEntity).GetInterfaces();
 
             if (interfaces.Contains(typeof(IWithVersioning)))
@@ -18,7 +18,7 @@ namespace Artichoke.Domain
                 if (property == null)
                     throw new MissingFieldException("Version");
                 else
-                    Version(property).Column("Version");
+                    Version(MemberExtensions.ToMember(property)).Column("Version");
             }
 
             if (interfaces.Contains(typeof(IWithAudit)))
@@ -27,14 +27,22 @@ namespace Artichoke.Domain
                 if (created == null)
                     throw new MissingFieldException("Created");
                 else
-                    Map(created, "Created").Insert().Not.Update();
+                    Map(MemberExtensions.ToMember(created), "Created").Insert().Not.Update();
 
                 var modified = typeof(TEntity).GetProperty("Modified");
                 if (modified == null)
                     throw new MissingFieldException("Modified");
                 else
-                    Map(modified, "Modified").Not.Update().Insert();
+                    Map(MemberExtensions.ToMember(modified), "Modified").Not.Update().Insert();
             }
+        }
+
+
+
+        protected EntityMap()
+            : base()
+        {
+            Initialize();
         }
     }
 }

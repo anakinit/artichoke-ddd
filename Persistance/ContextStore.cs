@@ -5,7 +5,7 @@ using System.Text;
 using System.Web;
 using System.Runtime.Remoting.Messaging;
 
-namespace Artichoke.Persistance
+namespace Artichoke.Persistence
 {
     internal static class ContextStore
     {

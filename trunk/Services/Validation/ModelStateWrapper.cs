@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace Artichoke.Services.Validation
 {
     //Based On: http://www.asp.net/Learn/mvc/tutorial-38-cs.aspx
-    public class ModelStateWrapper : IValidationDictionary
+    public class ModelStateWrapper : IValidation
     {
         private ModelStateDictionary _modelState;
 

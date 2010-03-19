@@ -7,9 +7,7 @@ namespace Artichoke.Domain
 {
     public abstract class EntityWithVersioning : EntityWithAudit, IWithVersioning
     {
-
         private int _version;
-
 
         public virtual int Version
         {

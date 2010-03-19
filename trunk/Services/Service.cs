@@ -10,10 +10,10 @@ namespace Artichoke.Services
 
     public abstract class Service
     {
-        private readonly IValidationDictionary validation;
+        private readonly IValidation validation;
         private bool _isValid = true;
 
-        public Service(IValidationDictionary validation)
+        protected Service(IValidation validation)
         {
             this.validation = validation;
         }
@@ -32,7 +32,7 @@ namespace Artichoke.Services
             }
         }
 
-        public IValidationDictionary Validation
+        public IValidation Validation
         {
             get { return validation; }
         }

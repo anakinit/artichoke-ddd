@@ -7,10 +7,6 @@ namespace Artichoke.Domain
 {
     public abstract class EntityBase : IEntityBase
     {
-        public EntityBase()
-        {
-        }
-
         public abstract override string ToString();
 
         public override int GetHashCode()

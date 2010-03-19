@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Artichoke.Services.Validation
 {
-    public interface IValidationDictionary
+    public interface IValidation
     {
         void AddError(string key, string errorMessage);
         bool IsValid { get; }

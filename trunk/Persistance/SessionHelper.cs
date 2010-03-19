@@ -7,7 +7,7 @@ using Castle.Windsor.Configuration.Interpreters;
 using NHibernate;
 using System.Reflection;
 
-namespace Artichoke.Persistance
+namespace Artichoke.Persistence
 {
     internal static class SessionHelper
     {
@@ -19,7 +19,7 @@ namespace Artichoke.Persistance
         {
             container = new WindsorContainer(new XmlInterpreter());
         }
-
+        
         private static string GetAssemblyName(Type type)
         {
             return type.Assembly.GetName().Name;

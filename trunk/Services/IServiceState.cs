@@ -8,7 +8,7 @@ namespace Artichoke.Services
 {
     public interface IServiceState
     {
-        IValidationDictionary Validation { get; }
+        IValidation Validation { get; }
         IList<IServiceMessage> Messages { get; }
 
         void AddValidationError(string key, string message);

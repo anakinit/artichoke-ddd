@@ -6,7 +6,7 @@ using NHibernate;
 using NHibernate.Linq;
 using Artichoke.Domain;
 
-namespace Artichoke.Persistance
+namespace Artichoke.Persistence
 {
     public abstract class Dao<TModel>
         : IDao where TModel : class
@@ -14,29 +14,24 @@ namespace Artichoke.Persistance
         private string dbKey;
         private Type modelType;
 
-        public Dao()
+        protected Dao()
             : this(CONSTANTS.DEFAULT_DB_KEY)
         { /* Do Nothing */ }
 
-        public Dao(string dbKey)
+        protected Dao(string dbKey)
         {
             this.dbKey = dbKey;
             this.modelType = typeof(TModel);
         }
 
-        public ISession GetCurrentSession()
+        public ISession CurrentSession
         {
-            return WebApplication.GetCurrentSession(modelType, dbKey);
+            get { return WebApplication.GetCurrentSession(modelType, dbKey); }
         }
 
         protected IOrderedQueryable<TModel> Query
         {
-            get { return GetCurrentSession().Linq<TModel>(); }
-        }
-
-        protected IOrderedQueryable<TQueryModel> GetQuery<TQueryModel>()
-        {
-            return GetCurrentSession().Linq<TQueryModel>();
+            get { return CurrentSession.Linq<TModel>(); }
         }
 
         public virtual void Save(object item)
@@ -46,10 +41,9 @@ namespace Artichoke.Persistance
 
         public virtual void Save(TModel item)
         {
-            var session = GetCurrentSession();
-            using (var transaction = session.BeginTransaction())
+            using (var transaction = CurrentSession.BeginTransaction())
             {
-                session.SaveOrUpdate(item);
+                CurrentSession.SaveOrUpdate(item);
                 transaction.Commit();
             }
         }
@@ -61,10 +55,9 @@ namespace Artichoke.Persistance
 
         public virtual void Delete(TModel item)
         {
-            var session = GetCurrentSession();
-            using (var transaction = session.BeginTransaction())
+            using (var transaction = CurrentSession.BeginTransaction())
             {
-                session.Delete(item);
+                CurrentSession.Delete(item);
                 transaction.Commit();
             }
         }

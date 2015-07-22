@@ -1,0 +1,1 @@
+A very basic DDD Entity/Service/Repository that is still in Alpha phases.  Incorporates validation and is designed to be used in an MVC environ.
